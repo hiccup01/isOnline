@@ -3,13 +3,14 @@
 // @namespace    http://isonline.cf/
 // @version      0.1
 // @description  Know who is online on Scratch!
-// @author       @World_Languages and many more
+// @author       @World_Languages with help from @JuegOStrower and alpha testers
 // @match        https://scratch.mit.edu/*
+// @icon         https://raw.githubusercontent.com/WorldLanguages/isOnline/master/green%20cat.png
 // @downloadURL  https://github.com/WorldLanguages/isOnline/raw/master/isOnline.user.js
 // @updateURL    https://github.com/WorldLanguages/isOnline/raw/master/isOnline.user.js
 // ==/UserScript==
 
-console.log("Tampermonkey started to run");
+console.log("Userscript started");
 
 var l = "isOnline log: ";
 var url = window.location.href;
@@ -24,7 +25,7 @@ if (url == 'https://scratch.mit.edu/' || url.startsWith('https://scratch.mit.edu
 
 if (window.location.href == 'https://scratch.mit.edu/accounts/settings/') {
     console.log(l+"Disabled access to location change");
-    document.getElementsByClassName("box-content tabs-content")[0].innerHTML = '<h4>Edit your account settings</h4> <br> <div class="field-wrapper"><label>Username</label><span>' + localuser + '</span></div><label>Location</label> <select style="cursor:not-allowed"> <option> Not changeable</option> </select> <br>Sorry, by using isOnline you cannot use a location in your profile. <br> <button style="cursor:not-allowed" type="submit">Save my Changes</button> <br> <br> <p><a href="/accounts/settings/delete_account_confirmation/">I want to delete my account</a></p>';}
+    document.getElementsByClassName("box-content tabs-content")[0].innerHTML = '<h4>Edit your account settings</h4> <br> <div class="field-wrapper"><label>Username</label><span>' + Scratch.INIT_DATA.LOGGED_IN_USER.model.username + '</span></div><label>Location</label> <select style="cursor:not-allowed"> <option> Not changeable</option> </select> <br>Sorry, by using isOnline you cannot use a location in your profile. <br> <button style="cursor:not-allowed" type="submit">Save my Changes</button> <br> <br> <p><a href="/accounts/settings/delete_account_confirmation/">I want to delete my account</a></p>';}
 
 
 
