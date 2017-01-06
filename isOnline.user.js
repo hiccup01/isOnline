@@ -5,7 +5,8 @@
 // @description  Know who is online on Scratch!
 // @author       @World_Languages and many more
 // @match        https://scratch.mit.edu/*
-// @grant        none
+// @downloadURL  https://github.com/WorldLanguages/isOnline/raw/master/isOnline.user.js
+// @updateURL    https://github.com/WorldLanguages/isOnline/raw/master/isOnline.user.js
 // ==/UserScript==
 
 console.log("Tampermonkey started to run");
