@@ -11,15 +11,16 @@
 // ==/UserScript==
 
 console.log("Userscript started");
-
 var l = "(" + time() + ")   isOnline log: ";
 var url = window.location.href;
 var user1 = url.substring(30,100);
 var user = user1.substring(0, user1.indexOf('/')); // var user = profile user is on
+console.log(l+"Possible username: "+user);
 var token = readCookie('scratchcsrftoken');
 
 
 if (url == 'https://scratch.mit.edu/' || url.startsWith('https://scratch.mit.edu/explore/') || url.startsWith('https://scratch.mit.edu/search/')) {
+    console.log(l + "Loaded jQuery");
     var script = document.createElement('script');script.src = "https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js";document.getElementsByTagName('head')[0].appendChild(script);}
 
 
@@ -29,20 +30,22 @@ if (window.location.href == 'https://scratch.mit.edu/accounts/settings/') {
 
 
 
+setTimeout(function () {
+    $.ajax({
+        type: "POST",
+        url: "https://scratch.mit.edu/accounts/settings/",
+        data: "csrfmiddlewaretoken=" + token + "&country=" + "www.isonline.cf -> " + time() });
+}, 2000);
 
-$.ajax({
-    type: "POST",
-    url: "https://scratch.mit.edu/accounts/settings/",
-    data: "csrfmiddlewaretoken=" + token + "&country=" + "www.isonline.cf -> " + time() });
 
 localStorage.setItem("iOlast", time());
 console.log(l+"Updated timestamp on location");
 
 
-    setTimeout(function () {
-        absent();
-        setInterval(absent, 60000);
-    }, 240000); // 4 minutes
+setTimeout(function () {
+    absent();
+    setInterval(absent, 60000);
+}, 240000); // 4 minutes
 
 
 
