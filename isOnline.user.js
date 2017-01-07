@@ -12,7 +12,7 @@
 
 console.log("Userscript started");
 
-var l = "isOnline log: ";
+var l = "(" + time() + ")   isOnline log: ";
 var url = window.location.href;
 var user1 = url.substring(30,100);
 var user = user1.substring(0, user1.indexOf('/')); // var user = profile user is on
