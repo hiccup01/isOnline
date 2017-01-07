@@ -126,7 +126,7 @@ function status() {
                 console.log(l+"Found timestamp for online/offline statuses: " + usertimestamp);
 
 
-                if (time() - usertimestamp < 250) {
+                if (time() - usertimestamp < 300) {
                     isOnline();}
                 else {
                     isOffline();}
