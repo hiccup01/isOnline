@@ -29,21 +29,20 @@ if (window.location.href == 'https://scratch.mit.edu/accounts/settings/') {
 
 
 
-setTimeout(function () {
-    $.ajax({
-        type: "POST",
-        url: "https://scratch.mit.edu/accounts/settings/",
-        data: "csrfmiddlewaretoken=" + token + "&country=" + "www.isonline.cf -> " + time() });
-    localStorage.setItem("iOlast", time());
-    console.log(l+"Updated timestamp on location");
-}, 2000);
+
+$.ajax({
+    type: "POST",
+    url: "https://scratch.mit.edu/accounts/settings/",
+    data: "csrfmiddlewaretoken=" + token + "&country=" + "www.isonline.cf -> " + time() });
+
+localStorage.setItem("iOlast", time());
+console.log(l+"Updated timestamp on location");
 
 
-
-setTimeout(function () {
-    absent();
-    setInterval(absent, 150000);
-}, 240000); // 4 minutes
+    setTimeout(function () {
+        absent();
+        setInterval(absent, 60000);
+    }, 240000); // 4 minutes
 
 
 
@@ -127,7 +126,7 @@ function status() {
                 console.log(l+"Found timestamp for online/offline statuses: " + usertimestamp);
 
 
-                if (time() - usertimestamp < 150) {
+                if (time() - usertimestamp < 250) {
                     isOnline();}
                 else {
                     isOffline();}
@@ -152,7 +151,7 @@ function status() {
 function absent() {
     console.log(l+"absent() started");
 
-    if (time()-localStorage.getItem("iOlast") > 230) {
+    if (time()-localStorage.getItem("iOlast") > 250) {
         console.log(l+"Sent absent request");
         $.ajax({
             type: "POST",
