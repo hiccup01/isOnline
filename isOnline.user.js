@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         isOnline
 // @namespace    http://isonline.cf/
-// @version      0.1
+// @version      0.1.0
 // @description  Know who is online on Scratch!
 // @author       @World_Languages with help from @JuegOStrower and alpha testers
 // @match        https://scratch.mit.edu/*
@@ -29,26 +29,28 @@ if (window.location.href == 'https://scratch.mit.edu/accounts/settings/') {
 
 
 
-window.onload = function() {
-
-    console.log(l+"Detected that page finished loading");
-
-
-
+setTimeout(function () {
     $.ajax({
         type: "POST",
         url: "https://scratch.mit.edu/accounts/settings/",
         data: "csrfmiddlewaretoken=" + token + "&country=" + "www.isonline.cf -> " + time() });
-
     localStorage.setItem("iOlast", time());
     console.log(l+"Updated timestamp on location");
+}, 2000);
 
 
 
-    setTimeout(function () {
-        setInterval(absent, 45000);
-    }, 240000); // 4 minutes
+setTimeout(function () {
+    absent();
+    setInterval(absent, 150000);
+}, 240000); // 4 minutes
 
+
+
+
+window.onload = function() {
+
+    console.log(l+"Detected that page finished loading");
 
 
     if (url.substring(24,29) == 'users' && url.endsWith("/followers/") === false && url.endsWith("/following/") === false && url.endsWith("/studios_following/") === false && url.endsWith("/studios/") === false && url.endsWith("/favorites/") === false && url.endsWith("/projects/") === false ) {
@@ -109,7 +111,7 @@ function status() {
                     var usertimestamp = response.substring(find+19, find+39);
                     usertimestamp = usertimestamp.replace(/\D/g,'');
                     console.log(l+"Found timestamp for absent/offline status: " + usertimestamp);
-                    if (time() - usertimestamp < 300) {
+                    if (time() - usertimestamp < 200) {
                         isAbsent();}
                     else {
                         isOffline();}
@@ -125,7 +127,7 @@ function status() {
                 console.log(l+"Found timestamp for online/offline statuses: " + usertimestamp);
 
 
-                if (time() - usertimestamp < 350) {
+                if (time() - usertimestamp < 150) {
                     isOnline();}
                 else {
                     isOffline();}
@@ -150,12 +152,14 @@ function status() {
 function absent() {
     console.log(l+"absent() started");
 
-    if (time()-localStorage.getItem("iOlast") > 250) {
+    if (time()-localStorage.getItem("iOlast") > 230) {
         console.log(l+"Sent absent request");
         $.ajax({
             type: "POST",
             url: "https://scratch.mit.edu/accounts/settings/",
-            data: "csrfmiddlewaretoken=" + token + "&country=" + "www.isabsent.cf -> " + time() });}}
+            data: "csrfmiddlewaretoken=" + token + "&country=" + "www.isabsent.cf -> " + time() });
+        localStorage.setItem("iOabslast", time());
+    }}
 
 
 
