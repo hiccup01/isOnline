@@ -44,7 +44,7 @@ setTimeout(function () {
 }, 240000); // 4 minutes
 
 
-window.onload = function() {
+window.addEventListener('load', function () {
     ioLog("Window has loaded")
 
     if (url.substring(24,29) == 'users' && url.endsWith("/followers/") === false && url.endsWith("/following/") === false && url.endsWith("/studios_following/") === false && url.endsWith("/studios/") === false && url.endsWith("/favorites/") === false && url.endsWith("/projects/") === false ) {
@@ -52,13 +52,13 @@ window.onload = function() {
         var localuser = Scratch.INIT_DATA.LOGGED_IN_USER.model.username;
         if (localuser.toUpperCase() == user.toUpperCase()) {
             iOlog("User is on own profile");
-            isOnline();}
+            isOnline();
+        }
         else {
             status();
         }
-    }
-};
-
+      }
+    });
 
 //FUNCTIONS
 
