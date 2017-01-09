@@ -50,7 +50,7 @@ setTimeout(function () {
 
 
 
-window.onload = function() {
+window.addEventListener('load', function () {
 
     console.log(l+"Detected that page finished loading");
 
@@ -65,7 +65,7 @@ window.onload = function() {
             status();}}
 
 
-};
+});
 
 
 
